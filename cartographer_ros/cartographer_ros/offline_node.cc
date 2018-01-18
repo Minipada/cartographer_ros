@@ -21,6 +21,7 @@
 #include <sys/resource.h>
 #include <time.h>
 #include <chrono>
+#include <gflags/gflags.h>
 
 #include "cartographer_ros/node.h"
 #include "cartographer_ros/urdf_reader.h"
