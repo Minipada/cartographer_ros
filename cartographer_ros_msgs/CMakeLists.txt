@@ -20,12 +20,12 @@ set(PACKAGE_DEPENDENCIES
   geometry_msgs
 )
 
+include(../../global_config.cmake)
+
 find_package(catkin REQUIRED COMPONENTS message_generation ${PACKAGE_DEPENDENCIES})
 
 add_message_files(
   FILES
-    StatusCode.msg
-    StatusResponse.msg
     SubmapList.msg
     SubmapEntry.msg
     SubmapTexture.msg

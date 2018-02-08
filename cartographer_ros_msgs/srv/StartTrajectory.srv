@@ -15,5 +15,4 @@
 cartographer_ros_msgs/TrajectoryOptions options
 cartographer_ros_msgs/SensorTopics topics
 ---
-cartographer_ros_msgs/StatusResponse status
 int32 trajectory_id

@@ -66,11 +66,6 @@ SubmapsDisplay::SubmapsDisplay() : tf_listener_(tf_buffer_) {
       "All", true,
       "Whether submaps from all trajectories should be displayed or not.",
       trajectories_category_, SLOT(AllEnabledToggled()), this);
-  fade_out_start_distance_in_meters_ =
-      new ::rviz::FloatProperty("Fade-out distance", 1.f,
-                                "Distance in meters in z-direction beyond "
-                                "which submaps will start to fade out.",
-                                this);
   const std::string package_path = ::ros::package::getPath(ROS_PACKAGE_NAME);
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
       package_path + kMaterialsDirectory, "FileSystem", ROS_PACKAGE_NAME);
@@ -213,8 +208,7 @@ void SubmapsDisplay::update(const float wall_dt, const float ros_dt) {
     for (auto& trajectory : trajectories_) {
       for (auto& submap_entry : trajectory->submaps) {
         submap_entry.second->SetAlpha(
-            transform_stamped.transform.translation.z,
-            fade_out_start_distance_in_meters_->getFloat());
+            transform_stamped.transform.translation.z);
       }
     }
   } catch (const tf2::TransformException& ex) {

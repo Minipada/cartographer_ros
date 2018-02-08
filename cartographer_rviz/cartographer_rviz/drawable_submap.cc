@@ -35,6 +35,11 @@ namespace cartographer_rviz {
 namespace {
 
 constexpr std::chrono::milliseconds kMinQueryDelayInMs(250);
+
+// Distance before which the submap will be shown at full opacity, and distance
+// over which the submap will then fade out.
+constexpr double kFadeOutStartDistanceInMeters = 1.;
+constexpr double kFadeOutDistanceInMeters = 2.;
 constexpr float kAlphaUpdateThreshold = 0.2f;
 
 const Ogre::ColourValue kSubmapIdColor(Ogre::ColourValue::Red);
@@ -149,16 +154,13 @@ bool DrawableSubmap::QueryInProgress() {
   return query_in_progress_;
 }
 
-void DrawableSubmap::SetAlpha(const double current_tracking_z,
-                              const float fade_out_start_distance_in_meters) {
-  const float fade_out_distance_in_meters =
-      2.f * fade_out_start_distance_in_meters;
+void DrawableSubmap::SetAlpha(const double current_tracking_z) {
   const double distance_z =
       std::abs(pose_.translation().z() - current_tracking_z);
   const double fade_distance =
-      std::max(distance_z - fade_out_start_distance_in_meters, 0.);
+      std::max(distance_z - kFadeOutStartDistanceInMeters, 0.);
   const float target_alpha = static_cast<float>(
-      std::max(0., 1. - fade_distance / fade_out_distance_in_meters));
+      std::max(0., 1. - fade_distance / kFadeOutDistanceInMeters));
 
   if (std::abs(target_alpha - current_alpha_) > kAlphaUpdateThreshold ||
       target_alpha == 0.f || target_alpha == 1.f) {
