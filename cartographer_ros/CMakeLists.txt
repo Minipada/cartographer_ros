@@ -58,8 +58,6 @@ if(DEFINED urdfdom_headers_VERSION)
   endif()
 endif()
 
-include(../../global_config.cmake)
-
 include_directories(
   ${urdfdom_headers_INCLUDE_DIRS}
 )
