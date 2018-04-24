@@ -63,9 +63,9 @@ include_directories(
 )
 
 # Override Catkin's GTest configuration to use GMock.
-set(GTEST_FOUND TRUE)
-set(GTEST_INCLUDE_DIRS ${GMOCK_INCLUDE_DIRS})
-set(GTEST_LIBRARIES ${GMOCK_LIBRARIES})
+#set(GTEST_FOUND TRUE)
+#set(GTEST_INCLUDE_DIRS ${GMOCK_INCLUDE_DIRS})
+#set(GTEST_LIBRARIES ${GMOCK_LIBRARIES})
 
 catkin_package(
   CATKIN_DEPENDS
